@@ -107,5 +107,14 @@ export const DOMHelper = (node) => {
         ? textNode.replaceWith(replacement)
         : node.appendChild(replacement);
     },
+    appendMarkupAsChild: (markup) => {
+      const range = document.createRange();
+      const parseContext = document.body;
+      range.selectNodeContents(parseContext);
+
+      const dropdownFragment = range.createContextualFragment(markup);
+
+      return node.appendChild(dropdownFragment);
+    },
   };
 };
