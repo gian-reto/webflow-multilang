@@ -103,11 +103,10 @@ $options-container-triangle-size: 0.8rem;
 .builtin-wml-prompt > .bwmlp-close {
   display: inline;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
   width: 1.5rem;
   height: 1.5rem;
-  padding: 1rem;
   cursor: pointer;
 
   color: #c2c2c2;
