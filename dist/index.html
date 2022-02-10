@@ -4,20 +4,21 @@
       }</style><script defer="defer" src="./index.js"></script></head><body class="wml-nojs wml-reg-default-de wml-reg-include-de wml-lng-include-de"><nav><div><div><div><a class="wml-lng-placeholder"><div><div><h5>Language</h5></div></div></a></div></div></div><div><div class="wml-reg-placeholder" style="width: 50px; height: 50px"></div></div></nav><h1 class="wml-lng-de wml-reg-ch">I'm only visible when "language" is "de" and "region" is "ch"!</h1><p class="wml-lng-de">I'm only visible when language is "de".</p><p class="wml-reg-de">I'm only visible when region is "de".</p><p>I'm always visible.</p><script>document.addEventListener("DOMContentLoaded", function () {
         WebflowMultilang({
           homepageURL: "https://google.com",
+          usePrompt: true,
           groups: [
-            {
-              urlQueryStringParameter: "language",
-              classPrefix: "wml-lng",
-              dropdown: {
-                strategy: "replace",
-                hideUnusedOptions: false,
-                redirectToHomepageOnMissingTranslation: false,
-                defaultOption: "de",
-                options: {
-                  de: "Deutsch",
-                },
-              },
-            },
+            // {
+            //   urlQueryStringParameter: "language",
+            //   classPrefix: "wml-lng",
+            //   dropdown: {
+            //     strategy: "replace",
+            //     hideUnusedOptions: false,
+            //     redirectToHomepageOnMissingTranslation: false,
+            //     defaultOption: "de",
+            //     options: {
+            //       de: "Deutsch",
+            //     },
+            //   },
+            // },
             {
               urlQueryStringParameter: "region",
               classPrefix: "wml-reg",
