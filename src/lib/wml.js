@@ -17,6 +17,7 @@ import { URLHelper } from "../util/url";
 /* const DEFAULTS = {
   config: {
     homepageURL: "https://google.com",
+    usePrompt: false,
     groups: [
       {
         urlQueryStringParameter: "language",

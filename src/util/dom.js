@@ -112,9 +112,12 @@ export const DOMHelper = (node) => {
       const parseContext = document.body;
       range.selectNodeContents(parseContext);
 
-      const dropdownFragment = range.createContextualFragment(markup);
+      const markupFragment = range.createContextualFragment(markup);
+      const markupFragmentChild = markupFragment.firstElementChild;
 
-      return node.appendChild(dropdownFragment);
+      node.appendChild(markupFragment);
+
+      return markupFragmentChild;
     },
   };
 };

@@ -51,20 +51,21 @@
       document.addEventListener("DOMContentLoaded", function () {
         WebflowMultilang({
           homepageURL: "https://google.com",
+          usePrompt: true,
           groups: [
-            {
-              urlQueryStringParameter: "language",
-              classPrefix: "wml-lng",
-              dropdown: {
-                strategy: "replace",
-                hideUnusedOptions: false,
-                redirectToHomepageOnMissingTranslation: false,
-                defaultOption: "de",
-                options: {
-                  de: "Deutsch",
-                },
-              },
-            },
+            // {
+            //   urlQueryStringParameter: "language",
+            //   classPrefix: "wml-lng",
+            //   dropdown: {
+            //     strategy: "replace",
+            //     hideUnusedOptions: false,
+            //     redirectToHomepageOnMissingTranslation: false,
+            //     defaultOption: "de",
+            //     options: {
+            //       de: "Deutsch",
+            //     },
+            //   },
+            // },
             {
               urlQueryStringParameter: "region",
               classPrefix: "wml-reg",

@@ -10,6 +10,20 @@ export const URLHelper = {
       return URLHelper.getURLParam(paramName);
     });
   },
+  getAllURLParams: () => {
+    const currentLocation = window.location.href;
+    const currentURL = new URL(currentLocation);
+    const entries = currentURL.searchParams.entries();
+
+    const result = {};
+
+    for (const [key, value] of entries) {
+      // each 'entry' is a [key, value] tupple
+      result[key] = value;
+    }
+
+    return result;
+  },
   isExternalURL: (url) => {
     return !(
       location.href

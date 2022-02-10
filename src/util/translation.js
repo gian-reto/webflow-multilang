@@ -12,12 +12,16 @@ import * as _includes from "lodash/includes";
 
 import { DOMHelper } from "./dom";
 import { URLHelper } from "./url";
+import { PromptHelper } from "./prompt";
 
 export const TranslationHelper = {
   getDefaultSelectionsFromLocalStorageOrURLOrConfig: ({
     withPageConfig: config,
+    onPromptUserCallback: onPromptUserCallback,
   } = {}) => {
     const { groups } = config;
+
+    const allURLParams = URLHelper.getAllURLParams();
 
     const localStorageSelections =
       TranslationHelper.getSelectionsFromLocalStorage();
@@ -26,6 +30,8 @@ export const TranslationHelper = {
       withPageConfig: config,
     });
 
+    let shouldPromptUser = false;
+
     const defaultSelections = _reduce(
       groups,
       (result, group) => {
@@ -33,42 +39,75 @@ export const TranslationHelper = {
         const [groupURLParamValue] = URLHelper.getURLParams([
           group.urlQueryStringParameter,
         ]);
-
-        // Modify visible URL in browser
-        const modifiedURL = URLHelper.removeQueryParamsFromUrl(
-          window.location.href,
-          [group.urlQueryStringParameter]
-        );
-        window.history.replaceState({}, "", modifiedURL);
+        const [groupPromptValue] = URLHelper.getURLParams([
+          `p-${group.urlQueryStringParameter}`,
+        ]);
 
         const candidate = {
           fromURL: _has(group.dropdown.options, groupURLParamValue)
             ? groupURLParamValue
+            : undefined,
+          fromPrompt: _has(group.dropdown.options, groupPromptValue)
+            ? groupPromptValue
             : undefined,
           fromLocalStorage: localStorageSelections?.[group.classPrefix],
           fromPageDefaults: pageDefaults?.[group.classPrefix],
           fromConfig: group.dropdown.defaultOption,
         };
 
-        const userChoice = TranslationHelper.isOptionQualifiedForInclusion({
+        const userPreset = TranslationHelper.isOptionQualifiedForInclusion({
           withPageConfig: config,
           groupClassPrefix: group.classPrefix,
-          optionKey: candidate.fromURL || candidate.fromLocalStorage,
+          optionKey:
+            candidate.fromURL ||
+            candidate.fromPrompt ||
+            candidate.fromLocalStorage,
         })
-          ? candidate.fromURL || candidate.fromLocalStorage
+          ? candidate.fromURL ||
+            candidate.fromPrompt ||
+            candidate.fromLocalStorage
           : undefined;
 
+        // If the prompt is enabled, check if it should be displayed
+        if (config.usePrompt && !userPreset) {
+          shouldPromptUser = true;
+
+          // If the user has previously selected a non-qualified option, redirect to homepageURL
+          if (candidate.fromPrompt) {
+            const redirectURL = URLHelper.addQueryParamsToUrl(
+              config.homepageURL,
+              allURLParams
+            );
+
+            window.location.assign(redirectURL);
+          }
+        }
+
+        // Get default choices as a possible fallback
         const defaultChoice =
           candidate.fromPageDefaults || candidate.fromConfig;
+
+        // Modify visible URL in browser to remove query parameters
+        const modifiedURL = URLHelper.removeQueryParamsFromUrl(
+          window.location.href,
+          [group.urlQueryStringParameter, `p-${group.urlQueryStringParameter}`]
+        );
+        window.history.replaceState({}, "", modifiedURL);
 
         // Return selections object
         return {
           ...result,
-          [groupName]: userChoice || defaultChoice,
+          [groupName]: userPreset || defaultChoice,
         };
       },
       {}
     );
+
+    if (shouldPromptUser) {
+      PromptHelper.promptUser();
+
+      onPromptUserCallback?.();
+    }
 
     return defaultSelections;
   },

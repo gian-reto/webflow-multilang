@@ -86,3 +86,70 @@ $options-container-triangle-size: 0.8rem;
 .builtin-wml-dropdown > .bwmld-options-container > .wml-option-active:hover {
   background-color: #e6e6e6;
 }
+
+/* Builtin Prompt */
+.builtin-wml-prompt {
+  display: block;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  background-color: rgb(247, 247, 245);
+}
+
+.builtin-wml-prompt > .bwmlp-close {
+  display: inline;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 1rem;
+  cursor: pointer;
+
+  color: #c2c2c2;
+}
+
+.builtin-wml-prompt > .bwmlp-close:hover {
+  color: #999999;
+}
+
+.builtin-wml-prompt > .bwmlp-prompt-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.builtin-wml-prompt > .bwmlp-prompt-container > .bwmlp-options-container {
+  margin: 2rem;
+}
+
+.builtin-wml-prompt
+  > .bwmlp-prompt-container
+  > .bwmlp-options-container
+  > .bwmlp-option {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+
+  padding: 1rem;
+  margin: 0.2rem 0;
+
+  border-radius: 15px;
+  color: #22282f;
+  background-color: white;
+}
+
+.builtin-wml-prompt
+  > .bwmlp-prompt-container
+  > .bwmlp-options-container
+  > .bwmlp-option:hover {
+  background-color: #f0f0ed;
+}
