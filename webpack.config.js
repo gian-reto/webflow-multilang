@@ -53,9 +53,9 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),
     }),
-    new CopyPlugin({
-      patterns: [{ from: "static", to: "public" }],
-    }),
+    // new CopyPlugin({
+    //   patterns: [{ from: "static", to: "public" }],
+    // }),
     // new BundleAnalyzerPlugin(),
   ],
 
