@@ -57,6 +57,10 @@ export const DOMHelper = (node) => {
 
         replacement.style.display = "none";
 
+        // Preserve wml-* classes from the original element
+        const classes = DOMHelper(node).findAllClassesStartingWith("wml-");
+        replacement.classList.add(...classes);
+
         // [...node.attributes].forEach((attr) => {
         //   replacement.setAttribute(attr.nodeName, attr.nodeValue);
         // });
