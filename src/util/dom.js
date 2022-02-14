@@ -57,9 +57,9 @@ export const DOMHelper = (node) => {
 
         replacement.style.display = "none";
 
-        [...node.attributes].forEach((attr) => {
-          replacement.setAttribute(attr.nodeName, attr.nodeValue);
-        });
+        // [...node.attributes].forEach((attr) => {
+        //   replacement.setAttribute(attr.nodeName, attr.nodeValue);
+        // });
       }
 
       return replacement;
