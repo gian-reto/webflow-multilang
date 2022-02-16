@@ -220,6 +220,11 @@ const setState = ({
   window.Webflow && window.Webflow.require("ix2").init();
   document.dispatchEvent(new Event("readystatechange"));
 
+  // Replay Videos
+  _map(document.querySelectorAll("video"), (videoElement) => {
+    videoElement.play();
+  });
+
   // Return updated selections
   return newSelections;
 };
