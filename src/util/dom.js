@@ -53,12 +53,19 @@ export const DOMHelper = (node) => {
       let replacement;
 
       if (DOMHelper(node).isElement()) {
-        replacement = document.createElement(node.tagName);
+        // replacement = document.createElement(node.tagName);
+
+        // Test
+        replacement = node.cloneNode(true);
 
         replacement.style.display = "none";
 
         // Preserve wml-* classes from the original element
         const classes = DOMHelper(node).findAllClassesStartingWith("wml-");
+
+        // Test
+        element.classList.remove(...element.classList);
+
         replacement.classList.add(...classes);
 
         // [...node.attributes].forEach((attr) => {
