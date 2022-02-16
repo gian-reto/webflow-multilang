@@ -64,7 +64,7 @@ export const DOMHelper = (node) => {
         const classes = DOMHelper(node).findAllClassesStartingWith("wml-");
 
         // Test
-        element.classList.remove(...element.classList);
+        replacement.classList.remove(...replacement.classList);
 
         replacement.classList.add(...classes);
 
