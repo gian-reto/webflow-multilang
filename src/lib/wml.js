@@ -1,11 +1,11 @@
+import * as _assign from "lodash/assign";
 import * as _each from "lodash/each";
 import * as _filter from "lodash/filter";
+import * as _find from "lodash/find";
 import * as _isEqual from "lodash/isEqual";
 import * as _map from "lodash/map";
 import * as _merge from "lodash/merge";
 import * as _reduce from "lodash/reduce";
-import * as _find from "lodash/find";
-import * as _assign from "lodash/assign";
 
 // Helpers
 import { DOMHelper } from "../util/dom";
@@ -213,6 +213,12 @@ const setState = ({
     withPageConfig: config,
     currentSelections: newSelections,
   });
+
+  // Reinit Webflow
+  window.Webflow && window.Webflow.destroy();
+  window.Webflow && window.Webflow.ready();
+  window.Webflow && window.Webflow.require("ix2").init();
+  document.dispatchEvent(new Event("readystatechange"));
 
   // Return updated selections
   return newSelections;

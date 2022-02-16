@@ -53,10 +53,10 @@ export const DOMHelper = (node) => {
       let replacement;
 
       if (DOMHelper(node).isElement()) {
-        // replacement = document.createElement(node.tagName);
+        replacement = document.createElement(node.tagName);
 
         // Test
-        replacement = node.cloneNode(true);
+        // replacement = node.cloneNode(true);
 
         replacement.style.display = "none";
 
@@ -64,7 +64,7 @@ export const DOMHelper = (node) => {
         const classes = DOMHelper(node).findAllClassesStartingWith("wml-");
 
         // Test
-        replacement.classList.remove(...replacement.classList);
+        // replacement.classList.remove(...replacement.classList);
 
         replacement.classList.add(...classes);
 
