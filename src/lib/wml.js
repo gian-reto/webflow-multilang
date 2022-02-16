@@ -221,7 +221,7 @@ const setState = ({
   document.dispatchEvent(new Event("readystatechange"));
 
   // Replay Videos
-  _map(document.querySelectorAll("video"), (videoElement) => {
+  _map(document.querySelectorAll("video[autoplay]"), (videoElement) => {
     videoElement.play();
   });
 
