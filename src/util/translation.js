@@ -1,18 +1,18 @@
 import * as _assign from "lodash/assign";
 import * as _has from "lodash/has";
+import * as _includes from "lodash/includes";
 import * as _isArray from "lodash/isArray";
 import * as _isEmpty from "lodash/isEmpty";
+import * as _isEqual from "lodash/isEqual";
 import * as _map from "lodash/map";
 import * as _merge from "lodash/merge";
 import * as _mergeWith from "lodash/mergeWith";
 import * as _reduce from "lodash/reduce";
 import * as _union from "lodash/union";
-import * as _isEqual from "lodash/isEqual";
-import * as _includes from "lodash/includes";
 
 import { DOMHelper } from "./dom";
-import { URLHelper } from "./url";
 import { PromptHelper } from "./prompt";
+import { URLHelper } from "./url";
 
 export const TranslationHelper = {
   getDefaultSelectionsFromLocalStorageOrURLOrConfig: ({
@@ -103,7 +103,10 @@ export const TranslationHelper = {
       {}
     );
 
-    if (shouldPromptUser) {
+    const promptUserOverride =
+      document.body.classList.contains("wml-disable-prompt");
+
+    if (shouldPromptUser && !promptUserOverride) {
       PromptHelper.promptUser();
 
       onPromptUserCallback?.();
